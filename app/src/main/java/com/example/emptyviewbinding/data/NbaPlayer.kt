@@ -15,5 +15,5 @@ data class NbaPlayer(
     @ColumnInfo
     var age: Int =0,
     @ColumnInfo
-    var skin: String =""
+    var skin: Int =0
 ): Serializable

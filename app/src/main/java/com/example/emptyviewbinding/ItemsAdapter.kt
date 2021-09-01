@@ -1,7 +1,9 @@
 package com.example.emptyviewbinding
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.emptyviewbinding.data.NbaPlayer
@@ -17,18 +19,22 @@ class ItemsAdapter: ListAdapter<NbaPlayer, ItemsAdapter.MainViewHolder>(ItemDiff
 
     override fun onViewAttachedToWindow(holder: MainViewHolder) {
         holder.itemView.setOnClickListener {
-        //    MainFragment.click(currentList[holder.adapterPosition])
+            Log.i("123", "GO! ${currentList[holder.adapterPosition]}")
+            val action  = MainFragmentDirections.actionMainFragmentToUpdateFragment(currentList[holder.adapterPosition])
+            holder.itemView.findNavController().navigate(action)
         }
     }
 
     override fun onViewDetachedFromWindow(holder: MainViewHolder) {
-        holder.itemView.setOnClickListener(null)
         super.onViewDetachedFromWindow(holder)
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        holder.binding.itemName.text = getItem(position).name
-        holder.binding.itemAge.text = getItem(position).age.toString()
+        holder.binding.tvName.text = getItem(position).name.toString()
+        holder.binding.tvAge.text = getItem(position).age.toString()
+        if (getItem(position).skin ==0)
+        holder.binding.icon.setImageResource(R.drawable.blackl)
+        else holder.binding.icon.setImageResource(R.drawable.white)
 
     }
 }

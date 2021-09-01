@@ -27,19 +27,24 @@ class MainViewModel(application: Application) : AndroidViewModel(application){
 
     fun insert(note: NbaPlayer) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addUser(note)
+            repository.add(note)
+        }
+    }
+    fun update(note: NbaPlayer) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.update(note)
         }
     }
 
     fun delete(note: NbaPlayer) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteUser(note)
+            repository.delete(note)
         }
     }
 
     fun deleteAll() {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteAllNotes()
+            repository.deleteAll()
         }
     }
 }

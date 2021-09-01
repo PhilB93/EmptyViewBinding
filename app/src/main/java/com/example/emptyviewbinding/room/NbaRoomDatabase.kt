@@ -7,7 +7,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.emptyviewbinding.data.NbaPlayer
 
-@Database(entities = [NbaPlayer::class], version = 1, exportSchema = false)
+@Database(entities = [NbaPlayer::class], version = 2, exportSchema = false)
 abstract class NbaRoomDatabase : RoomDatabase() {
 
     abstract fun noteDao(): RoomDao
@@ -26,7 +26,7 @@ abstract class NbaRoomDatabase : RoomDatabase() {
                     context.applicationContext,
                     NbaRoomDatabase::class.java,
                     "players_database"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 return instance
             }

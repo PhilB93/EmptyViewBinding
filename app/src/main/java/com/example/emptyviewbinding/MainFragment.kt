@@ -7,7 +7,10 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.emptyviewbinding.data.NbaPlayer
 import com.example.emptyviewbinding.databinding.MainFragmentBinding
 import com.example.emptyviewbinding.preference.PreferenceActivity
@@ -31,16 +34,24 @@ class MainFragment : Fragment() {
         FITLER = prefs.getString("prefFilter", "").toString()
         Log.i("123", "FILTER:${FITLER}")
         mAdapter = ItemsAdapter()
+        GridLayoutManager(
+            requireContext(), // context
+            3, // span count
+            RecyclerView.VERTICAL, // orientation
+            false // reverse layout
+        ).apply {
+            // specify the layout manager for recycler view
+            mBinding.recycler.layoutManager = this
+        }
         mBinding.recycler.adapter = mAdapter
         mViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         mViewModel.readAllData.observe(viewLifecycleOwner, Observer { list ->
             mAdapter.submitList(list)
 
         })
-        mBinding.fabAdd.setOnClickListener {
-            mViewModel.insert(NbaPlayer(0, getRandomString(3), (1..12).shuffled().first(), getRandomColor()))
-
-        }
+       mBinding.fabAdd.setOnClickListener {
+           findNavController().navigate(R.id.action_mainFragment_to_addFragment)
+       }
         return mBinding.root
     }
 
@@ -48,18 +59,7 @@ class MainFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)
     }
-    private fun getRandomString(length: Int) : String {
-        val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
-        return (1..length)
-            .map { allowedChars.random() }
-            .joinToString("")
-    }
-    private fun getRandomColor() : String {
-        val black ="Black"
-        val white ="White"
-        val list = mutableListOf<String>(black ,white)
-        return list.shuffled().first()
-    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.main_menu){
             val intent = Intent(requireActivity(), PreferenceActivity::class.java)
