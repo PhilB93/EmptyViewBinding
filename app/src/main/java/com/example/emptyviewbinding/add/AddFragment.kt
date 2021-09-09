@@ -18,7 +18,7 @@ import java.util.*
 
 class AddFragment : Fragment() {
 
-    private lateinit var mUserViewModel: MainViewModel
+    private lateinit var mViewModel: AddViewModel
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
     private var isWhite:Int = 0
@@ -31,7 +31,7 @@ class AddFragment : Fragment() {
     ): View? {
         _binding = FragmentAddBinding.inflate(inflater, container, false)
 
-        mUserViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        mViewModel = ViewModelProvider(this).get(AddViewModel::class.java)
 
 
 
@@ -68,11 +68,11 @@ class AddFragment : Fragment() {
             skin
 
         )
-
         // Add Data to Database
-        mUserViewModel.insert(note)
-        // Navigate Back
-        findNavController().navigate(R.id.action_addFragment_to_mainFragment)
+        mViewModel.insert(note)
+            findNavController().navigate(R.id.action_addFragment_to_mainFragment)
+
+
     }
 }
 

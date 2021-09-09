@@ -34,6 +34,7 @@ class MainFragment : Fragment() {
         FITLER = prefs.getString("prefFilter", "").toString()
         Log.i("123", "FILTER:${FITLER}")
         mAdapter = ItemsAdapter()
+
         GridLayoutManager(
             requireContext(), // context
             3, // span count
@@ -45,13 +46,14 @@ class MainFragment : Fragment() {
         }
         mBinding.recycler.adapter = mAdapter
         mViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        mViewModel.readAllData.observe(viewLifecycleOwner, Observer { list ->
-            mAdapter.submitList(list)
+            mViewModel.readAllData.observe(viewLifecycleOwner, Observer { list ->
+                mAdapter.submitList(list)
 
-        })
-       mBinding.fabAdd.setOnClickListener {
-           findNavController().navigate(R.id.action_mainFragment_to_addFragment)
-       }
+            })
+            mBinding.fabAdd.setOnClickListener {
+                findNavController().navigate(R.id.action_mainFragment_to_addFragment)
+            }
+
         return mBinding.root
     }
 

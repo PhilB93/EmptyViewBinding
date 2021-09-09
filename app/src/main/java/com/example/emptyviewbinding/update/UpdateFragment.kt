@@ -20,7 +20,7 @@ class UpdateFragment : Fragment() {
 
     private val args by navArgs<UpdateFragmentArgs>()
 
-    private lateinit var mUserViewModel: MainViewModel
+    private lateinit var mViewModel: UpdateViewModel
     private var _binding: FragmentUpdateBinding? = null
     private val binding get() = _binding!!
     private var isWhite: Int = 0
@@ -33,7 +33,7 @@ class UpdateFragment : Fragment() {
 
 
 
-        mUserViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        mViewModel = ViewModelProvider(this).get(UpdateViewModel::class.java)
         // typeChooser()
         binding.apply {
             etName.setText(args.item.name)
@@ -71,10 +71,13 @@ class UpdateFragment : Fragment() {
             age, skin,
         )
         // Update Current
-        mUserViewModel.update(note)
+        mViewModel.update(note)
+
+            findNavController().navigate(R.id.action_updateFragment_to_mainFragment)
+
         Log.i("123", "SKIN ${skin.toString()}")
         // Navigate Back
-        findNavController().navigate(R.id.action_updateFragment_to_mainFragment)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -91,13 +94,15 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
 private fun deleteUser() {
     val builder = AlertDialog.Builder(requireContext())
     builder.setPositiveButton("Yes") { _, _ ->
-        mUserViewModel.delete(args.item)
-        Toast.makeText(
-            requireContext(),
-            "Successfully removed: ${args.item.name}",
-            Toast.LENGTH_SHORT
-        ).show()
-        findNavController().navigate(R.id.action_updateFragment_to_mainFragment)
+        mViewModel.delete(args.item)
+            Toast.makeText(
+                requireContext(),
+                "Successfully removed: ${args.item.name}",
+                Toast.LENGTH_SHORT
+            ).show()
+            findNavController().navigate(R.id.action_updateFragment_to_mainFragment)
+
+
     }
     builder.setNegativeButton("No") { _, _ -> }
     builder.setTitle("Delete ${args.item.name}?")

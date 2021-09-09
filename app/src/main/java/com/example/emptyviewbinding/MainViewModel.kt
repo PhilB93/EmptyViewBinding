@@ -1,50 +1,61 @@
 package com.example.emptyviewbinding
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
+import com.example.emptyviewbinding.add.DatabaseCursor
+
 import com.example.emptyviewbinding.data.NbaPlayer
 import com.example.emptyviewbinding.room.NbaRoomDatabase
 import com.example.emptyviewbinding.room.RoomRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
-class MainViewModel(application: Application) : AndroidViewModel(application){
-
-
+class MainViewModel(application: Application) : AndroidViewModel(application) {
+private val mContext = application
     val readAllData: LiveData<List<NbaPlayer>>
-    private val repository: RoomRepository
-
+val db = DatabaseCursor(mContext)
     init {
+        when (TYPE_DATABASE) {
+            TYPE_ROOM -> {
+                val noteDao = NbaRoomDatabase.getDatabase(mContext).noteDao()
+                REPOSITORY = RoomRepository(noteDao)
+                readAllData = REPOSITORY.readAllData
+            }
+            else ->
 
-        val noteDao = NbaRoomDatabase.getDatabase(
-            application
-        ).noteDao()
-        repository = RoomRepository(noteDao)
-        readAllData = repository.readAllData
+                readAllData = db.getAllNotes(FITLER)
 
+            }
+        Log.i("123", "INIT $FITLER")
+            /*TYPE_CURSOR ->
+            {
 
-    }
-
-    fun insert(note: NbaPlayer) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.add(note)
-        }
-    }
-    fun update(note: NbaPlayer) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.update(note)
-        }
-    }
-
-    fun delete(note: NbaPlayer) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.delete(note)
+            }*/
         }
     }
 
-    fun deleteAll() {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteAll()
-        }
+  //  }
+
+
+/*
+fun add(note: NbaPlayer, onSuccess: () -> Unit) =
+    viewModelScope.launch(Dispatchers.IO) {
+        REPOSITORY.add(note, onSuccess)
     }
-}
+
+fun update(note: NbaPlayer, onSuccess: () -> Unit) =
+    viewModelScope.launch(Dispatchers.IO) {
+        REPOSITORY.update(note, onSuccess)
+    }
+
+
+fun delete(note: NbaPlayer, onSuccess: () -> Unit) =
+    viewModelScope.launch(Dispatchers.IO) {
+        REPOSITORY.delete(note)
+    }
+
+
+fun deleteAll(onSuccess: () -> Unit) =
+    viewModelScope.launch(Dispatchers.IO) {
+        REPOSITORY.deleteAll(onSuccess)
+    }
+*/
