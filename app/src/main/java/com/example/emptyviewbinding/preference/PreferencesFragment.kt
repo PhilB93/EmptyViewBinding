@@ -24,16 +24,6 @@ class PreferencesFragment : PreferenceFragmentCompat() {
 
     }
 
-    private fun filterList(preference: Preference) {
-
-        preference.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            Log.i("123", "Установил ключ:${preference.key}")
-            activity?.onBackPressed()
-            true
-
-        }
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.pref_action_menu, menu)
     }

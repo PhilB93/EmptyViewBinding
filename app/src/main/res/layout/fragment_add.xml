@@ -17,12 +17,13 @@
         android:gravity="center_horizontal"
         android:inputType="textPersonName"
         android:paddingVertical="20dp"
-        android:text="@string/name"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:hint="@string/enter_name"
+       />
 
     <EditText
         android:id="@+id/et_age"
@@ -32,11 +33,11 @@
         android:ems="10"
         android:gravity="center"
         android:inputType="number"
-        android:text="@string/_69"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_name" />
+        app:layout_constraintTop_toBottomOf="@+id/et_name"
+        android:hint="@string/enter_age"/>
 
     <Switch
         android:id="@+id/switch_skin"
@@ -54,11 +55,9 @@
         android:id="@+id/add_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_marginBottom="24dp"
         android:text="@string/add"
         app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switch_skin" />

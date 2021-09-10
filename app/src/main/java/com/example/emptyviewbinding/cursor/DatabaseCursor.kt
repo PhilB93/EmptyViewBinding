@@ -1,4 +1,4 @@
-package com.example.emptyviewbinding.add
+package com.example.emptyviewbinding.cursor
 
 import android.content.ContentValues
 import android.content.Context
@@ -8,7 +8,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
-import com.example.emptyviewbinding.data.NbaPlayer
+import com.example.emptyviewbinding.data.Person
 import com.example.emptyviewbinding.room.RoomDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -46,11 +46,11 @@ class DatabaseCursor(context: Context) :
     }
 
 
-    private suspend fun getCarsList(filter:String):List<NbaPlayer>{
+    private suspend fun getCarsList(filter:String):List<Person>{
         return withContext(Dispatchers.IO) {
-            val listOfCars = mutableListOf<NbaPlayer>()
+            val listOfCars = mutableListOf<Person>()
             val db = writableDatabase
-            val selectQuery = "SELECT * FROM $TABLE_NAME ORDER BY $filter"
+            val selectQuery = "SELECT * FROM $TABLE_NAME  ORDER BY $filter"
             val cursor = db.rawQuery(selectQuery,null)
             cursor?.let{
                 if (cursor.moveToFirst()) {
@@ -59,7 +59,7 @@ class DatabaseCursor(context: Context) :
                         val name = cursor.getString(cursor.getColumnIndex("name"))
                         val age = cursor.getInt(cursor.getColumnIndex("age"))
                         val skin = cursor.getInt(cursor.getColumnIndex("skin"))
-                        listOfCars.add(NbaPlayer(id, name, age, skin))
+                        listOfCars.add(Person(id, name, age, skin))
                     } while (cursor.moveToNext())
                 }
             }
@@ -67,13 +67,13 @@ class DatabaseCursor(context: Context) :
             listOfCars
         }
     }
-    override fun getAllNotes(filter: String): LiveData<List<NbaPlayer>> {
-        return liveData<List<NbaPlayer>> {
+    override fun getAllNotes(filter: String): LiveData<List<Person>> {
+        return liveData<List<Person>> {
             emit(getCarsList(filter))
         }
     }
 
-    override suspend fun insert(note: NbaPlayer) {
+    override suspend fun insert(note: Person) {
         Log.d(LOG_TAG, "Cursor addCar($note)")
         val db = writableDatabase
         val values = ContentValues()
@@ -84,7 +84,7 @@ class DatabaseCursor(context: Context) :
         db.close()
     }
 
-    override suspend fun update(note: NbaPlayer) {
+    override suspend fun update(note: Person) {
         Log.d(LOG_TAG, "Cursor updateCar($note)")
         val db = writableDatabase
         val values = ContentValues()
@@ -96,7 +96,7 @@ class DatabaseCursor(context: Context) :
         db.close()
     }
 
-    override suspend fun delete(note: NbaPlayer) {
+    override suspend fun delete(note: Person) {
         Log.d(LOG_TAG, "Cursor deleteCar($note)")
         val db = writableDatabase
         db.delete(TABLE_NAME, "id" + "=?", arrayOf(note.id.toString()))
@@ -108,9 +108,9 @@ class DatabaseCursor(context: Context) :
     }
 
 
-     fun getCar(id: Int): LiveData<NbaPlayer?> {
+     fun getCar(id: Int): LiveData<Person?> {
 
-        val carLiveData = MutableLiveData<NbaPlayer>()
+        val carLiveData = MutableLiveData<Person>()
         val db = writableDatabase
 
         val selectQuery = "SELECT * FROM $TABLE_NAME WHERE id = $id"
@@ -124,7 +124,7 @@ class DatabaseCursor(context: Context) :
                     val name = cursor.getString(cursor.getColumnIndex("name"))
                     val age = cursor.getInt(cursor.getColumnIndex("age"))
                     val skin = cursor.getInt(cursor.getColumnIndex("skin"))
-                    val car =  NbaPlayer(id, name, age, skin)
+                    val car =  Person(id, name, age, skin)
                     Log.d(LOG_TAG, "FROM GET CAR CURSOR $car")
                     carLiveData.value = car
                 } while (cursor.moveToNext())

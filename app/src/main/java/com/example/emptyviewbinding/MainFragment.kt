@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.emptyviewbinding.data.NbaPlayer
 import com.example.emptyviewbinding.databinding.MainFragmentBinding
 import com.example.emptyviewbinding.preference.PreferenceActivity
 
@@ -32,6 +31,11 @@ class MainFragment : Fragment() {
 
         val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
         FITLER = prefs.getString("prefFilter", "").toString()
+        TYPE_DATABASE = when(prefs.getBoolean("database", false)) {
+            false -> TYPE_CURSOR
+            true -> TYPE_ROOM
+        }
+Log.i("123", "DATABASE: $TYPE_DATABASE")
         Log.i("123", "FILTER:${FITLER}")
         mAdapter = ItemsAdapter()
 
@@ -53,6 +57,7 @@ class MainFragment : Fragment() {
             mBinding.fabAdd.setOnClickListener {
                 findNavController().navigate(R.id.action_mainFragment_to_addFragment)
             }
+
 
         return mBinding.root
     }

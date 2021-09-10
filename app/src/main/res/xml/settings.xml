@@ -11,5 +11,14 @@
         android:summary="Choose how sort notes on main screen"
         android:title="Sort options">
     </ListPreference>
+    <SwitchPreference
+        android:icon="@drawable/ic_done"
+        android:switchTextOff="Cursor"
+        android:switchTextOn="Room"
+        android:summaryOff="Cursor"
+        android:summaryOn="Room"
+        android:key="database"
+        android:title="Database Handler">
+    </SwitchPreference>
 
 </androidx.preference.PreferenceScreen>

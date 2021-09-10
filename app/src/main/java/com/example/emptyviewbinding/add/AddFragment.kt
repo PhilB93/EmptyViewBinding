@@ -2,18 +2,17 @@ package com.example.emptyviewbinding.add
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.emptyviewbinding.MainViewModel
 import com.example.emptyviewbinding.R
-import com.example.emptyviewbinding.data.NbaPlayer
+import com.example.emptyviewbinding.data.Person
 import com.example.emptyviewbinding.databinding.FragmentAddBinding
-import java.util.*
 
 
 class AddFragment : Fragment() {
@@ -39,38 +38,40 @@ class AddFragment : Fragment() {
             switchSkin.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     isWhite = 1
-                    binding.switchSkin.text = "White"
+                    binding.switchSkin.text = "Master"
                 } else {
                     isWhite = 0
-                    binding.switchSkin.text = "Negr"
+                    binding.switchSkin.text = "Slave"
                 }
             }
-
             addBtn.setOnClickListener { insertDataToDatabase() }
         }
-
-
-
         return binding.root
     }
 
-
+    private fun inputCheck(name: String, age: String): Boolean {
+        return !(TextUtils.isEmpty(name) || TextUtils.isEmpty(age) || age.toInt() !in 0..130)
+    }
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private fun insertDataToDatabase() {
+
         val name = binding.etName.text.toString()
-        val age = binding.etAge.text.toString().toInt()
+        val age = binding.etAge.text.toString()
         val skin = isWhite
         // Create User Object
-        val note = NbaPlayer(
-            0,
-            name,
-            age,
-            skin
-
-        )
-        // Add Data to Database
-        mViewModel.insert(note)
+        if (inputCheck(name, age)) {
+            val note = Person(
+                0,
+                name,
+                age.toInt(),
+                skin
+            )
+            // Add Data to Database
+            mViewModel.insert(note)
             findNavController().navigate(R.id.action_addFragment_to_mainFragment)
+        }
+        else
+            Toast.makeText(requireContext(), "Check correct data", Toast.LENGTH_SHORT).show()
 
 
     }
