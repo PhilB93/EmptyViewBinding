@@ -14,11 +14,20 @@
     <string-array name="entries">
         <item>Name</item>
         <item>Age</item>
-        <item>Skin</item>
     </string-array>
     <string-array name="entriesValues">
         <item>name</item>
         <item>age</item>
-        <item>skin</item>
+    </string-array>
+
+    <string-array name="filterEntries">
+        <item>All Boys</item>
+        <item>Only Young</item>
+        <item>Only Old</item>
+    </string-array>
+    <string-array name="filterEntriesValues">
+        <item>id NOT NULL</item>
+        <item>age &#60; 40</item>
+        <item>age &#62; 39</item>
     </string-array>
 </resources>

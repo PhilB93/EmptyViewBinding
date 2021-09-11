@@ -1,11 +1,11 @@
-package com.example.emptyviewbinding
+package com.example.emptyviewbinding.ui
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.emptyviewbinding.R
 import com.example.emptyviewbinding.data.Person
 import com.example.emptyviewbinding.databinding.RowItemBinding
 
@@ -19,7 +19,8 @@ class ItemsAdapter: ListAdapter<Person, ItemsAdapter.MainViewHolder>(ItemDiffUti
 
     override fun onViewAttachedToWindow(holder: MainViewHolder) {
         holder.itemView.setOnClickListener {
-            val action  = MainFragmentDirections.actionMainFragmentToUpdateFragment(currentList[holder.bindingAdapterPosition])
+            val action  =
+                MainFragmentDirections.actionMainFragmentToUpdateFragment(currentList[holder.bindingAdapterPosition])
             holder.itemView.findNavController().navigate(action)
         }
     }

@@ -1,11 +1,11 @@
-package com.example.emptyviewbinding
+package com.example.emptyviewbinding.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.emptyviewbinding.R
 import com.example.emptyviewbinding.databinding.ActivityMainBinding
 
 

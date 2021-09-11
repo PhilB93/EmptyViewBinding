@@ -1,12 +1,8 @@
 package com.example.emptyviewbinding.preference
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
-import com.example.emptyviewbinding.FITLER
 import com.example.emptyviewbinding.R
 
 class PreferencesFragment : PreferenceFragmentCompat() {

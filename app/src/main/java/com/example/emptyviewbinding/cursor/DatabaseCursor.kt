@@ -46,11 +46,11 @@ class DatabaseCursor(context: Context) :
     }
 
 
-    private suspend fun getCarsList(filter:String):List<Person>{
+    private suspend fun getCarsList(sort:String, filter: String):List<Person>{
         return withContext(Dispatchers.IO) {
             val listOfCars = mutableListOf<Person>()
             val db = writableDatabase
-            val selectQuery = "SELECT * FROM $TABLE_NAME  ORDER BY $filter"
+            val selectQuery = "SELECT * FROM $TABLE_NAME WHERE $filter ORDER BY $sort"
             val cursor = db.rawQuery(selectQuery,null)
             cursor?.let{
                 if (cursor.moveToFirst()) {
@@ -67,9 +67,9 @@ class DatabaseCursor(context: Context) :
             listOfCars
         }
     }
-    override fun getAllNotes(filter: String): LiveData<List<Person>> {
+    override fun getAllNotes(filter:String, sort: String): LiveData<List<Person>> {
         return liveData<List<Person>> {
-            emit(getCarsList(filter))
+            emit(getCarsList(filter, sort))
         }
     }
 
@@ -103,9 +103,7 @@ class DatabaseCursor(context: Context) :
         db.close()
     }
 
-    override suspend fun deleteAll() {
-        TODO("Not yet implemented")
-    }
+
 
 
      fun getCar(id: Int): LiveData<Person?> {

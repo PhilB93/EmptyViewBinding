@@ -12,6 +12,4 @@ interface RepositioryForAll {
 
     suspend fun delete(note: Person)
 
-    suspend fun deleteAll()
-
 }

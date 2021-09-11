@@ -1,5 +1,6 @@
-package com.example.emptyviewbinding
+package com.example.emptyviewbinding.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.emptyviewbinding.*
 import com.example.emptyviewbinding.databinding.MainFragmentBinding
 import com.example.emptyviewbinding.preference.PreferenceActivity
 
@@ -22,6 +24,17 @@ class MainFragment : Fragment() {
     private lateinit var mAdapter: ItemsAdapter
 
 
+    override fun onAttach(context: Context) {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        SORT = prefs.getString("prefSort", "name").toString()
+        FILTER = prefs.getString("prefFilter", "id NOT NULL").toString()
+        TYPE_DATABASE = when(prefs.getBoolean("database", false)) {
+            false -> TYPE_CURSOR
+            true -> TYPE_ROOM
+        }
+        Log.i("123", "DATABASE: $TYPE_DATABASE")
+        super.onAttach(context)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,14 +42,6 @@ class MainFragment : Fragment() {
         _binding = MainFragmentBinding.inflate(layoutInflater, container, false)
         setHasOptionsMenu(true)
 
-        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        FITLER = prefs.getString("prefFilter", "").toString()
-        TYPE_DATABASE = when(prefs.getBoolean("database", false)) {
-            false -> TYPE_CURSOR
-            true -> TYPE_ROOM
-        }
-Log.i("123", "DATABASE: $TYPE_DATABASE")
-        Log.i("123", "FILTER:${FITLER}")
         mAdapter = ItemsAdapter()
 
         GridLayoutManager(
@@ -51,9 +56,11 @@ Log.i("123", "DATABASE: $TYPE_DATABASE")
         mBinding.recycler.adapter = mAdapter
         mViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
             mViewModel.readAllData.observe(viewLifecycleOwner, Observer { list ->
-                mAdapter.submitList(list)
 
+                mAdapter.submitList(list)
+                Log.i("123 " , list.toString());
             })
+        Log.i("123", "SIZE: ${mViewModel.readAllData.value?.size}")
             mBinding.fabAdd.setOnClickListener {
                 findNavController().navigate(R.id.action_mainFragment_to_addFragment)
             }

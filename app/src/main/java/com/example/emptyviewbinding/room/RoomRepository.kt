@@ -1,7 +1,8 @@
 package com.example.emptyviewbinding.room
 
 import androidx.lifecycle.LiveData
-import com.example.emptyviewbinding.FITLER
+import com.example.emptyviewbinding.FILTER
+import com.example.emptyviewbinding.SORT
 import com.example.emptyviewbinding.RepositioryForAll
 import com.example.emptyviewbinding.data.Person
 
@@ -9,7 +10,7 @@ import com.example.emptyviewbinding.data.Person
 class RoomRepository(private val noteDao: RoomDao):RepositioryForAll {
 
     override val readAllData: LiveData<List<Person>>
-        get() = noteDao.getAllNotes(FITLER)
+        get() = noteDao.getAllNotes(FILTER, SORT)
 
 
      override  suspend fun add(note: Person) {
@@ -26,10 +27,6 @@ class RoomRepository(private val noteDao: RoomDao):RepositioryForAll {
 
     }
 
-    override  suspend fun deleteAll() {
-        noteDao.deleteAll()
-
-    }
 
 
 }
