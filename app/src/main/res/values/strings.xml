@@ -10,7 +10,7 @@
     <string name="update">Update</string>
     <string name="enter_age">Enter age</string>
     <string name="enter_name">Enter name</string>
-    <string name="negr">Negr</string>
+    <string name="negr">Slave</string>
     <string-array name="entries">
         <item>Name</item>
         <item>Age</item>

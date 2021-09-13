@@ -23,7 +23,7 @@ private const val CREATE_TABLE_SQL =
     "CREATE TABLE IF NOT EXISTS $TABLE_NAME (" +
             "id	INTEGER NOT NULL," +
             "name	TEXT NOT NULL," +
-            "age	TEXT NOT NULL," +
+            "age	INTEGER NOT NULL," +
             "skin	INTEGER NOT NULL," +
             "PRIMARY KEY(id AUTOINCREMENT)" +
             ");"
