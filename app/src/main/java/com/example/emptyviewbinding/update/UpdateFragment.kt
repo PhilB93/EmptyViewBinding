@@ -91,7 +91,7 @@ class UpdateFragment : Fragment() {
     }
 
     private fun inputCheck(name: String, age: String): Boolean {
-        return !(TextUtils.isEmpty(name) || TextUtils.isEmpty(age) || age.toInt() !in 0..130)
+        return !(TextUtils.isEmpty(name) || TextUtils.isEmpty(age)  || age.toInt() !in 1..130)
     }
 
     private fun deleteUser() {
