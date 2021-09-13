@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EmptyViewBinding">
 
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,6 +21,7 @@
         <activity
             android:name=".preference.PreferenceActivity"
             android:label="Settings"
+            android:screenOrientation="portrait"
            />
     </application>
 
