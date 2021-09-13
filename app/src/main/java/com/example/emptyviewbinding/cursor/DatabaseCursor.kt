@@ -103,40 +103,4 @@ class DatabaseCursor(context: Context) :
         db.close()
     }
 
-
-
-
-     fun getCar(id: Int): LiveData<Person?> {
-
-        val carLiveData = MutableLiveData<Person>()
-        val db = writableDatabase
-
-        val selectQuery = "SELECT * FROM $TABLE_NAME WHERE id = $id"
-        val cursor = db.rawQuery(selectQuery, null)
-        Log.d(LOG_TAG, "$cursor")
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                do {
-
-                    val id = cursor.getInt(cursor.getColumnIndex("id"))
-                    val name = cursor.getString(cursor.getColumnIndex("name"))
-                    val age = cursor.getInt(cursor.getColumnIndex("age"))
-                    val skin = cursor.getInt(cursor.getColumnIndex("skin"))
-                    val car =  Person(id, name, age, skin)
-                    Log.d(LOG_TAG, "FROM GET CAR CURSOR $car")
-                    carLiveData.value = car
-                } while (cursor.moveToNext())
-            }
-        }
-        cursor.close()
-        Log.d(LOG_TAG, "FROM GET CAR CURSOR ${carLiveData.value}")
-        return carLiveData
-    }
-
-
-
-
-
-
-
 }
