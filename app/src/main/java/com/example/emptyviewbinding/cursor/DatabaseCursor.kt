@@ -6,14 +6,12 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.example.emptyviewbinding.data.Person
 import com.example.emptyviewbinding.room.RoomDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.sql.SQLException
-import java.util.concurrent.Executors
 
 private const val LOG_TAG = "SQLiteOpenHelper"
 private const val DATABASE_NAME = "players_database"
@@ -27,8 +25,6 @@ private const val CREATE_TABLE_SQL =
             "skin	INTEGER NOT NULL," +
             "PRIMARY KEY(id AUTOINCREMENT)" +
             ");"
-
-private val executor = Executors.newSingleThreadExecutor()
 
 class DatabaseCursor(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION), RoomDao {
@@ -68,7 +64,7 @@ class DatabaseCursor(context: Context) :
         }
     }
     override fun getAllNotes(filter:String, sort: String): LiveData<List<Person>> {
-        return liveData<List<Person>> {
+        return liveData{
             emit(getCarsList(filter, sort))
         }
     }

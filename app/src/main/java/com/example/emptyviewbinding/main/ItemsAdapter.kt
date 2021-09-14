@@ -1,4 +1,4 @@
-package com.example.emptyviewbinding.ui
+package com.example.emptyviewbinding.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -25,12 +25,10 @@ class ItemsAdapter: ListAdapter<Person, ItemsAdapter.MainViewHolder>(ItemDiffUti
         }
     }
 
-    override fun onViewDetachedFromWindow(holder: MainViewHolder) {
-        super.onViewDetachedFromWindow(holder)
-    }
+
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        holder.binding.tvName.text = getItem(position).name.toString()
+        holder.binding.tvName.text = getItem(position).name
         holder.binding.tvAge.text = getItem(position).age.toString()
         if (getItem(position).skin ==0)
         holder.binding.icon.setImageResource(R.drawable.blackl)

@@ -1,4 +1,4 @@
-package com.example.emptyviewbinding
+package com.example.emptyviewbinding.repository
 
 import androidx.lifecycle.LiveData
 import com.example.emptyviewbinding.data.Person

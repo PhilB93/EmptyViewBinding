@@ -1,4 +1,4 @@
-package com.example.emptyviewbinding.ui
+package com.example.emptyviewbinding.main
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.emptyviewbinding.data.Person

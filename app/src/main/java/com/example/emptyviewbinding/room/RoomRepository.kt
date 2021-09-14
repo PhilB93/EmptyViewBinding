@@ -1,13 +1,13 @@
 package com.example.emptyviewbinding.room
 
 import androidx.lifecycle.LiveData
-import com.example.emptyviewbinding.FILTER
-import com.example.emptyviewbinding.SORT
-import com.example.emptyviewbinding.RepositioryForAll
+import com.example.emptyviewbinding.util.FILTER
+import com.example.emptyviewbinding.util.SORT
+import com.example.emptyviewbinding.repository.RepositioryForAll
 import com.example.emptyviewbinding.data.Person
 
 
-class RoomRepository(private val noteDao: RoomDao):RepositioryForAll {
+class RoomRepository(private val noteDao: RoomDao): RepositioryForAll {
 
     override val readAllData: LiveData<List<Person>>
         get() = noteDao.getAllNotes(FILTER, SORT)

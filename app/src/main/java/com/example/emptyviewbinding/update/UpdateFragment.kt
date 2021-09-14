@@ -1,5 +1,6 @@
 package com.example.emptyviewbinding.update
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.TextUtils
@@ -13,7 +14,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.emptyviewbinding.R
 import com.example.emptyviewbinding.data.Person
 import com.example.emptyviewbinding.databinding.FragmentUpdateBinding
-import java.util.*
 
 class UpdateFragment : Fragment() {
 
@@ -23,10 +23,11 @@ class UpdateFragment : Fragment() {
     private var _binding: FragmentUpdateBinding? = null
     private val binding get() = _binding!!
     private var isWhite: Int = 0
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentUpdateBinding.inflate(inflater, container, false)
 
 
@@ -71,7 +72,7 @@ class UpdateFragment : Fragment() {
             // Update Current
             mViewModel.update(note)
             findNavController().navigate(R.id.action_updateFragment_to_mainFragment)
-            Log.i("123", "SKIN ${skin.toString()}")
+            Log.i("123", "SKIN $skin")
         }
         // Navigate Back
         else

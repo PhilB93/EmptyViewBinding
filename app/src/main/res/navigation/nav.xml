@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.emptyviewbinding.ui.MainFragment"
+        android:name="com.example.emptyviewbinding.main.MainFragment"
         android:label="Gachi Database"
         tools:layout="@layout/main_fragment" >
         <action

@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
-import com.example.emptyviewbinding.ui.MainActivity
+import com.example.emptyviewbinding.main.MainActivity
 import com.example.emptyviewbinding.R
 import com.example.emptyviewbinding.databinding.ActivityPreferenceBinding
 

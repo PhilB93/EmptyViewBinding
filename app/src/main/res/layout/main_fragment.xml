@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/mainFragment"
-    tools:context=".ui.MainFragment">
+    tools:context=".main.MainFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
@@ -36,6 +36,7 @@
         android:layout_marginBottom="32dp"
         android:clickable="true"
         android:focusable="true"
+        app:useCompatPadding="true"
         app:srcCompat="@drawable/ic_baseline_add_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
