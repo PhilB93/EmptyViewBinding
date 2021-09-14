@@ -6,10 +6,27 @@
         android:icon="@drawable/ic_filter_list"
         android:entries="@array/entries"
         android:entryValues="@array/entriesValues"
-        android:key="prefFilter"
+        android:key="prefSort"
         android:defaultValue="name"
-        android:summary="Choose how sort notes on main screen"
-        android:title="Sort options">
+        android:title="Sort">
     </ListPreference>
+    <ListPreference
+        android:icon="@drawable/ic_baseline_sort_24"
+        android:entries="@array/filterEntries"
+        android:entryValues="@array/filterEntriesValues"
+        android:key="prefFilter"
+        android:defaultValue="id NOT NULL"
+        android:title="Filter">
+    </ListPreference>
+    <SwitchPreference
+        android:icon="@drawable/ic_done"
+        android:switchTextOff="Cursor"
+        android:switchTextOn="Room"
+        android:summaryOff="Cursor"
+        app:icon="@drawable/ic_twotone_handyman_24"
+        android:summaryOn="Room"
+        android:key="database"
+        android:title="Database Handler">
+    </SwitchPreference>
 
 </androidx.preference.PreferenceScreen>

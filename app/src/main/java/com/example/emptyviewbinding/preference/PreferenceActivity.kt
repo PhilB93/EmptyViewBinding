@@ -3,9 +3,8 @@ package com.example.emptyviewbinding.preference
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.PreferenceFragment
 import androidx.appcompat.widget.Toolbar
-import com.example.emptyviewbinding.MainActivity
+import com.example.emptyviewbinding.main.MainActivity
 import com.example.emptyviewbinding.R
 import com.example.emptyviewbinding.databinding.ActivityPreferenceBinding
 

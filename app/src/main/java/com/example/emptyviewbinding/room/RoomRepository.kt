@@ -1,31 +1,32 @@
 package com.example.emptyviewbinding.room
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import com.example.emptyviewbinding.FITLER
-import com.example.emptyviewbinding.data.NbaPlayer
+import com.example.emptyviewbinding.util.FILTER
+import com.example.emptyviewbinding.util.SORT
+import com.example.emptyviewbinding.repository.RepositioryForAll
+import com.example.emptyviewbinding.data.Person
 
 
-class RoomRepository(private val noteDao: RoomDao) {
+class RoomRepository(private val noteDao: RoomDao): RepositioryForAll {
 
-    val readAllData: LiveData<List<NbaPlayer>> = noteDao.getAllNotes(FITLER)
+    override val readAllData: LiveData<List<Person>>
+        get() = noteDao.getAllNotes(FILTER, SORT)
 
 
-    suspend fun add(note: NbaPlayer) {
+     override  suspend fun add(note: Person) {
+           noteDao.insert(note)
+       }
+
+    override suspend fun update(note: Person) {
         noteDao.insert(note)
+
     }
 
-    suspend fun update(note: NbaPlayer) {
-        noteDao.insert(note)
-    }
-
-    suspend fun delete(note: NbaPlayer){
+    override suspend fun delete(note: Person) {
         noteDao.delete(note)
+
     }
 
-    suspend fun deleteAll(){
-        noteDao.deleteAll()
-    }
 
 
 }

@@ -1,12 +1,8 @@
 package com.example.emptyviewbinding.preference
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
-import com.example.emptyviewbinding.FITLER
 import com.example.emptyviewbinding.R
 
 class PreferencesFragment : PreferenceFragmentCompat() {
@@ -22,16 +18,6 @@ class PreferencesFragment : PreferenceFragmentCompat() {
         setHasOptionsMenu(true)
 
 
-    }
-
-    private fun filterList(preference: Preference) {
-
-        preference.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            Log.i("123", "Установил ключ:${preference.key}")
-            activity?.onBackPressed()
-            true
-
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -1,15 +1,15 @@
-package com.example.emptyviewbinding
+package com.example.emptyviewbinding.main
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.emptyviewbinding.data.NbaPlayer
+import com.example.emptyviewbinding.R
+import com.example.emptyviewbinding.data.Person
 import com.example.emptyviewbinding.databinding.RowItemBinding
 
-class ItemsAdapter: ListAdapter<NbaPlayer, ItemsAdapter.MainViewHolder>(ItemDiffUtil()) {
+class ItemsAdapter: ListAdapter<Person, ItemsAdapter.MainViewHolder>(ItemDiffUtil()) {
 
     class MainViewHolder(val binding: RowItemBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -19,18 +19,16 @@ class ItemsAdapter: ListAdapter<NbaPlayer, ItemsAdapter.MainViewHolder>(ItemDiff
 
     override fun onViewAttachedToWindow(holder: MainViewHolder) {
         holder.itemView.setOnClickListener {
-            Log.i("123", "GO! ${currentList[holder.adapterPosition]}")
-            val action  = MainFragmentDirections.actionMainFragmentToUpdateFragment(currentList[holder.adapterPosition])
+            val action  =
+                MainFragmentDirections.actionMainFragmentToUpdateFragment(currentList[holder.bindingAdapterPosition])
             holder.itemView.findNavController().navigate(action)
         }
     }
 
-    override fun onViewDetachedFromWindow(holder: MainViewHolder) {
-        super.onViewDetachedFromWindow(holder)
-    }
+
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        holder.binding.tvName.text = getItem(position).name.toString()
+        holder.binding.tvName.text = getItem(position).name
         holder.binding.tvAge.text = getItem(position).age.toString()
         if (getItem(position).skin ==0)
         holder.binding.icon.setImageResource(R.drawable.blackl)

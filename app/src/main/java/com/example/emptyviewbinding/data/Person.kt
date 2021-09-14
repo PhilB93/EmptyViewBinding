@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 
 @Entity(tableName = "players_table")
-data class NbaPlayer(
+data class Person(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     @ColumnInfo
